@@ -1,11 +1,9 @@
-import { Text, View } from 'react-native';
+import { router } from 'expo-router';
 
 const Screen = () => {
-  return (
-    <View className="flex-1 justify-center items-center bg-background">
-      <Text className="font-gimlet-medium text-white">Authenticated</Text>
-    </View>
-  );
+  router.push('/authenticated/tabs');
+
+  return null;
 };
 
 export default Screen;

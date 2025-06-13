@@ -1,0 +1,18 @@
+//@ts-nocheck
+import Svg, { Path } from 'react-native-svg';
+
+const HomeIcon = ({ active }) => {
+  return (
+    <Svg
+      width={24}
+      height={24}
+      fill={active ? '#FFCC33' : '#EEF0F2'}
+      viewBox="0 0 24 24"
+    >
+      <Path d="M19 4h-2V2h-2v2H9V2H7v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM5 20V8h14V6v14H5z" />
+      <Path d="M7 11h10v2H7z" />
+    </Svg>
+  );
+};
+
+export default HomeIcon;
