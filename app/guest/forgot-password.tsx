@@ -1,10 +1,10 @@
 import Layout from '@/components/Layout';
-import LoginScreen from '@/screens/LoginScreen';
+import ForgotPasswordScreen from '@/screens/ForgotPasswordScreen';
 
 const Screen = () => {
   return (
     <Layout>
-      <LoginScreen />
+      <ForgotPasswordScreen />
     </Layout>
   );
 };

@@ -11,6 +11,9 @@ module.exports = {
     extend: {
       colors: {
         background: '#333366',
+        primary: '#66CCCC',
+        secondary: '#EEF0F2',
+        link: '#FFCC33',
       },
       fontFamily: {
         'gimlet-light': ['GimletSansVariable-Light'],
