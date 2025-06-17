@@ -40,3 +40,6 @@ app-example
 
 # IDEA
 .idea/
+
+# ENV
+.env

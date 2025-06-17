@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import { router } from 'expo-router';
@@ -5,8 +7,13 @@ import { router } from 'expo-router';
 import Button from '@/components/Button';
 import LockIcon from '@/icons/LockIcon';
 import MailIcon from '@/icons/MailIcon';
+import { useLogin } from '@/services';
 
 const LoginScreen = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { mutate: login, isPending } = useLogin();
+
   return (
     <View className="flex-1 justify-center items-center gap-6">
       <View className="justify-center items-center gap-0.5">
@@ -30,6 +37,7 @@ const LoginScreen = () => {
               className="ml-2 flex-1 text-primary font-gimlet-medium"
               keyboardType="email-address"
               autoCapitalize="none"
+              onChangeText={(text) => setEmail(text)}
             />
           </View>
         </View>
@@ -46,13 +54,17 @@ const LoginScreen = () => {
               secureTextEntry={true}
               keyboardType="default"
               autoCapitalize="none"
+              onChangeText={(text) => setPassword(text)}
             />
           </View>
         </View>
         <Button
-          title="Prijavi se"
+          title={isPending ? 'Prijava u toku...' : 'Prijavi se'}
           onPress={() => {
-            router.replace('/authenticated');
+            login({
+              email,
+              password,
+            });
           }}
         />
         <TouchableOpacity

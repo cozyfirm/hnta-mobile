@@ -1,4 +1,11 @@
-import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  Image,
+  Linking,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import { router } from 'expo-router';
 
@@ -38,7 +45,10 @@ const ForgotPasswordScreen = () => {
             />
           </View>
         </View>
-        <Button title="Pošalji" />
+        <Button
+          title="Pošalji"
+          onPress={() => Linking.openURL('https://www.google.com')}
+        />
         <TouchableOpacity
           onPress={() => {
             router.replace('/guest');

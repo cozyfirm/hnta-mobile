@@ -1,7 +1,10 @@
 import { router } from 'expo-router';
+import { useEffect } from 'react';
 
 const Screen = () => {
-  router.push('/authenticated/tabs');
+  useEffect(() => {
+    router.push('/authenticated/tabs');
+  }, []);
 
   return null;
 };

@@ -8,7 +8,7 @@ const Screen = () => {
 
   useEffect(() => {
     if (user) {
-      router.replace('/authenticated');
+      router.replace('/authenticated/tabs');
     } else {
       router.replace('/guest');
     }

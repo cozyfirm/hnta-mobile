@@ -1,7 +1,11 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import { Slot } from 'expo-router';
+import ToastManager from 'toastify-react-native';
 
 import '../global.css';
+
+const queryClient = new QueryClient();
 
 const Layout = () => {
   const [fontsLoaded, fontError] = useFonts({
@@ -17,7 +21,12 @@ const Layout = () => {
     return null;
   }
 
-  return <Slot />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Slot />
+      <ToastManager />
+    </QueryClientProvider>
+  );
 };
 
 export default Layout;
