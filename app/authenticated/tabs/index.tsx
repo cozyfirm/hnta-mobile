@@ -1,14 +1,11 @@
-import { Button, SafeAreaView } from 'react-native';
-
-import { useLogout } from '@/services';
+import Layout from '@/components/Layout';
+import HomeScreen from '@/screens/HomeScreen';
 
 const Screen = () => {
-  const { logout } = useLogout();
-
   return (
-    <SafeAreaView className="flex-1 justify-center items-center">
-      <Button title="Odjavi se" onPress={() => logout()} />
-    </SafeAreaView>
+    <Layout primaryBackground>
+      <HomeScreen />
+    </Layout>
   );
 };
 

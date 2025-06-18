@@ -14,6 +14,7 @@ module.exports = {
         primary: '#66CCCC',
         secondary: '#EEF0F2',
         link: '#FFCC33',
+        tertiary: '#FFCC33',
       },
       fontFamily: {
         'gimlet-light': ['GimletSansVariable-Light'],

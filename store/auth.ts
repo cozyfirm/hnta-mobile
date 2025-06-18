@@ -4,6 +4,12 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 
 interface User {
   id: number;
+  name: string;
+  photo?: {
+    hasPhoto: boolean;
+    path: string;
+    photo_uri: string;
+  };
 }
 
 interface AuthStore {
