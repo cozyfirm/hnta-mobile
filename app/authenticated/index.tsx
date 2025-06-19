@@ -1,9 +1,10 @@
-import { router } from 'expo-router';
 import { useEffect } from 'react';
+
+import { router } from 'expo-router';
 
 const Screen = () => {
   useEffect(() => {
-    router.push('/authenticated/tabs');
+    router.replace('/authenticated/tabs');
   }, []);
 
   return null;

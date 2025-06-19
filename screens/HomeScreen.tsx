@@ -1,6 +1,7 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 import Header from '@/components/Header';
 
@@ -76,6 +77,9 @@ const HomeScreen = () => {
               icon: (
                 <MaterialIcons name="location-pin" size={48} color="#333366" />
               ),
+              onPress: () => {
+                router.push('/authenticated/locations');
+              },
             },
             {
               label: 'Studenti',
@@ -87,6 +91,7 @@ const HomeScreen = () => {
               activeOpacity={0.8}
               key={card.label}
               className={`flex-1 items-center justify-center ${card.color} rounded-xl p-2`}
+              onPress={card?.onPress}
             >
               {card.icon}
               <Text className="text-lg font-gimlet-bold text-background text-center mt-2">

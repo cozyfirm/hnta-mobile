@@ -5,6 +5,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 interface User {
   id: number;
   name: string;
+  api_token: string;
   photo?: {
     hasPhoto: boolean;
     path: string;

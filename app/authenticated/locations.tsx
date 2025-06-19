@@ -1,10 +1,10 @@
 import Layout from '@/components/Layout';
-import HomeScreen from '@/screens/HomeScreen';
+import LocationsScreen from '@/screens/LocationsScreen';
 
 const Screen = () => {
   return (
-    <Layout primaryBackground isTabs>
-      <HomeScreen />
+    <Layout primaryBackground>
+      <LocationsScreen />
     </Layout>
   );
 };

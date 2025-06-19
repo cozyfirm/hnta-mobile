@@ -69,7 +69,7 @@ const LoginScreen = () => {
         />
         <TouchableOpacity
           onPress={() => {
-            router.replace('/guest/forgot-password');
+            router.push('/guest/forgot-password');
           }}
           className="mt-4"
         >
