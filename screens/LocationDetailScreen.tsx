@@ -39,19 +39,16 @@ const LocationDetailScreen = () => {
     );
   }
 
-  const imageUrl = location?.location?.main_img
-    ? `https://staging.talentakademija.ba/${location?.location?.photo_path}${location?.location?.main_img}`
+  const imageUrl = location?.main_img
+    ? `https://staging.talentakademija.ba/${location?.photo_path}${location?.main_img}`
     : null;
 
-  const mapImageUrl = location?.location?.map_img
-    ? `https://staging.talentakademija.ba/${location?.location?.photo_path}${location?.location?.map_img}`
+  const mapImageUrl = location?.map_img
+    ? `https://staging.talentakademija.ba/${location?.photo_path}${location?.map_img}`
     : null;
 
   // Remove HTML tags from description
-  const plainDescription = location?.location?.description?.replace(
-    /<[^>]+>/g,
-    ''
-  );
+  const plainDescription = location?.description?.replace(/<[^>]+>/g, '');
 
   return (
     <View className="flex-1 bg-background">
@@ -67,15 +64,15 @@ const LocationDetailScreen = () => {
         <View className="p-5">
           <View className="border border-primary rounded-xl p-5 mb-5">
             <Text className="text-secondary text-2xl font-gimlet-bold mb-2">
-              {location?.location?.title}
+              {location?.title}
             </Text>
             <Text className="text-primary text-xl font-gimlet-medium mb-4">
-              {location?.location?.address}
+              {location?.address}
             </Text>
             <View className="flex-row gap-2">
               <TouchableOpacity
                 className="w-full flex-row gap-2 bg-transparent rounded-xl py-2 px-10 justify-center items-center border border-primary"
-                onPress={() => Linking.openURL(location?.location?.location)}
+                onPress={() => Linking.openURL(location?.location)}
                 activeOpacity={0.8}
               >
                 <Ionicons name="location-outline" size={24} color="#66CCCC" />
@@ -87,7 +84,7 @@ const LocationDetailScreen = () => {
             {mapImageUrl && (
               <TouchableOpacity
                 onPress={() => {
-                  Linking.openURL(location?.location?.location);
+                  Linking.openURL(location?.location);
                 }}
                 activeOpacity={0.8}
               >

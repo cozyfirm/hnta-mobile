@@ -44,12 +44,16 @@ const HomeScreen = () => {
                   color="#333366"
                 />
               ),
+              onPress: () => {
+                router.push('/authenticated/presenters');
+              },
             },
           ].map((card) => (
             <TouchableOpacity
               activeOpacity={0.8}
               key={card.label}
               className={`flex-1 items-center justify-center ${card.color} rounded-xl p-2`}
+              onPress={card?.onPress}
             >
               {card.icon}
               <Text className="text-lg font-gimlet-bold text-background text-center mt-2">

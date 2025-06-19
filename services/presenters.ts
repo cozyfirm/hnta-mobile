@@ -10,7 +10,7 @@ interface Country {
   flag: string;
 }
 
-export interface Location {
+export interface Presenter {
   id: number;
   title: string;
   address: string;
@@ -24,11 +24,15 @@ export interface Location {
   map_img?: string;
   photo_path: string;
   public: number;
+  name: string;
+  short_description: string;
+  presenter_role?: string;
+  institution?: string;
 }
 
-export interface LocationsResponse {
-  locations: {
-    data: Location[];
+export interface PresentersResponse {
+  presenters: {
+    data: Presenter[];
     current_page: number;
     last_page: number;
     per_page: number;
@@ -36,40 +40,42 @@ export interface LocationsResponse {
   };
 }
 
-export const useLocations = () => {
+export const usePresenters = (programId: number) => {
   const { user } = useAuthStore();
 
   return useInfiniteQuery({
-    queryKey: ['locations'],
+    queryKey: ['presenters', programId],
     queryFn: async ({ pageParam = 1 }) => {
-      const response = await axios.post('/api/public-part/locations', {
+      const response = await axios.post('/api/public-part/presenters', {
         api_token: user?.api_token,
+        program_id: programId,
         number: 10,
         page: pageParam,
       });
 
-      return response?.data?.data as LocationsResponse;
+      return response?.data?.data as PresentersResponse;
     },
     getNextPageParam: (lastPage) => {
-      const { current_page, last_page } = lastPage.locations;
+      const { current_page, last_page } = lastPage.presenters;
       return current_page < last_page ? current_page + 1 : undefined;
     },
     initialPageParam: 1,
+    enabled: !!programId,
   });
 };
 
-export const useLocationPreview = (id: string) => {
+export const usePresenterPreview = (id: string) => {
   const { user } = useAuthStore();
 
   return useQuery({
-    queryKey: ['location', id],
+    queryKey: ['presenter', id],
     queryFn: async () => {
-      const response = await axios.post('/api/public-part/locations/preview', {
+      const response = await axios.post('/api/public-part/presenters/preview', {
         api_token: user?.api_token,
         id,
       });
 
-      return response?.data?.data?.location as Location;
+      return response?.data?.data?.presenter as Presenter;
     },
   });
-};
+}; 
