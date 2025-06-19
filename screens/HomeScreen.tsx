@@ -70,6 +70,9 @@ const HomeScreen = () => {
                   color="#333366"
                 />
               ),
+              onPress: () => {
+                router.push('/authenticated/news');
+              },
             },
             {
               label: 'Lokacije',
