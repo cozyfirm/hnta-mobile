@@ -89,9 +89,12 @@ const HomeScreen = () => {
               },
             },
             {
-              label: 'Studenti',
+              label: 'Učesnici',
               color: 'bg-tertiary',
               icon: <MaterialIcons name="person" size={48} color="#333366" />,
+              onPress: () => {
+                router.push('/authenticated/attendees');
+              },
             },
           ].map((card) => (
             <TouchableOpacity

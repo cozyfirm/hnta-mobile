@@ -1,16 +1,7 @@
 import React from 'react';
 
-import {
-  ActivityIndicator,
-  Image,
-  Linking,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { ActivityIndicator, Image, ScrollView, Text, View } from 'react-native';
 
-import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams } from 'expo-router';
 
 import Header from '@/components/Header';
@@ -42,9 +33,9 @@ const PresenterDetailScreen = () => {
   const plainDescription = presenter?.description?.replace(/<[^>]+>/g, '');
 
   // Debug logging
-  console.log('Presenter photo_path:', presenter?.photo_path);
-  const imageUrl = presenter?.photo_path ? `https://staging.talentakademija.ba/${presenter.photo_path}` : undefined;
-  console.log('Image URL:', imageUrl);
+  const imageUrl = presenter?.photo_path
+    ? `https://staging.talentakademija.ba/${presenter.photo_path}`
+    : undefined;
 
   return (
     <View className="flex-1 bg-background">
