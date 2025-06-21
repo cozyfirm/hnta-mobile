@@ -1,10 +1,10 @@
 import Layout from '@/components/Layout';
-import NotificationsScreen from '@/screens/NotificationsScreen';
+import NotificationDetailScreen from '@/screens/NotificationDetailScreen';
 
 const Screen = () => {
   return (
     <Layout primaryBackground>
-      <NotificationsScreen />
+      <NotificationDetailScreen />
     </Layout>
   );
 };
