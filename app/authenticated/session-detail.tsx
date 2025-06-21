@@ -1,12 +1,12 @@
 import Layout from '@/components/Layout';
-import ScheduleListScreen from '@/screens/ScheduleListScreen';
+import SessionDetailScreen from '@/screens/SessionDetailScreen';
 
 const Screen = () => {
   return (
     <Layout primaryBackground>
-      <ScheduleListScreen />
+      <SessionDetailScreen />
     </Layout>
   );
 };
 
-export default Screen;
+export default Screen; 

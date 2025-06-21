@@ -15,6 +15,8 @@ module.exports = {
         secondary: '#EEF0F2',
         link: '#FFCC33',
         tertiary: '#FFCC33',
+        meal: '#FF6633',
+        party: '#99CC33',
       },
       fontFamily: {
         'gimlet-light': ['GimletSansVariable-Light'],

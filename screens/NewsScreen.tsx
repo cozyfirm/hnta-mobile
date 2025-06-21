@@ -117,6 +117,7 @@ const NewsScreen = () => {
   return (
     <View className="flex-1 bg-background">
       <Header showBackButton />
+
       <FlatList
         data={news}
         keyExtractor={(item) => item.id.toString()}

@@ -22,6 +22,9 @@ const HomeScreen = () => {
                   color="#333366"
                 />
               ),
+              onPress: () => {
+                router.push('/authenticated/tabs/calendar');
+              },
             },
             {
               label: 'Generalne\nobavijesti',
