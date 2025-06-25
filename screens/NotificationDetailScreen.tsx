@@ -10,8 +10,6 @@ const NotificationDetailScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { data: notification, isLoading, isError } = useNotificationPreview(id);
 
-  console.log(notification);
-
   if (isLoading) {
     return (
       <View className="flex-1 items-center justify-center bg-background">

@@ -4,3 +4,4 @@ export * from './blog';
 export * from './presenters';
 export * from './attendees';
 export * from './notifications';
+export * from './chat';

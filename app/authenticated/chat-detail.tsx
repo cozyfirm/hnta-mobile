@@ -1,10 +1,12 @@
+import { Stack } from 'expo-router';
+
 import Layout from '@/components/Layout';
-import MessagesScreen from '@/screens/MessagesScreen';
+import ChatDetailScreen from '@/screens/ChatDetailScreen';
 
 const Screen = () => {
   return (
     <Layout primaryBackground>
-      <MessagesScreen />
+      <ChatDetailScreen />
     </Layout>
   );
 };

@@ -37,8 +37,6 @@ const SessionDetailScreen = () => {
 
   const session = data.data.session;
 
-  console.log(session);
-
   return (
     <View className="flex-1 bg-background">
       <Header showBackButton />

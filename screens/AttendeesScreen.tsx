@@ -17,6 +17,16 @@ import { type Attendee, useAttendees } from '@/services';
 import { useProgramStore } from '@/store';
 
 const AttendeeCard = ({ item }: { item: Attendee }) => {
+  const handleChatPress = () => {
+    router.push({
+      pathname: '/authenticated/chat-detail',
+      params: { 
+        userId: item.id.toString(),
+        name: item.name,
+      },
+    });
+  };
+
   return (
     <TouchableOpacity
       className="border border-primary rounded-xl mb-5 overflow-hidden"
@@ -44,7 +54,10 @@ const AttendeeCard = ({ item }: { item: Attendee }) => {
               {item?.name}
             </Text>
           </View>
-          <TouchableOpacity className="bg-primary rounded-xl w-14 h-14 justify-center items-center">
+          <TouchableOpacity 
+            className="bg-primary rounded-xl w-14 h-14 justify-center items-center"
+            onPress={handleChatPress}
+          >
             <Ionicons name="chatbubble-outline" size={28} color="#2D2B54" />
           </TouchableOpacity>
         </View>
