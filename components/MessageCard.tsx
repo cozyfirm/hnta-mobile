@@ -12,12 +12,6 @@ interface MessageCardProps {
 const MessageCard = ({ item, onPress }: MessageCardProps) => {
   const isRead = item?.my_side?.unread === 0;
 
-  console.log(item);
-
-  console.log(
-    'https://staging.talentakademija.ba/' + item?.user_rel?.user_rel?.photo_path
-  );
-
   return (
     <TouchableOpacity onPress={onPress}>
       <View

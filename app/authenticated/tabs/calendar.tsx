@@ -3,7 +3,7 @@ import ScheduleListScreen from '@/screens/ScheduleListScreen';
 
 const Screen = () => {
   return (
-    <Layout primaryBackground>
+    <Layout primaryBackground isTabs>
       <ScheduleListScreen />
     </Layout>
   );

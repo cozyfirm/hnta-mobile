@@ -1,6 +1,13 @@
 import { useState } from 'react';
 
-import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  Image,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import { router } from 'expo-router';
 
@@ -15,7 +22,7 @@ const LoginScreen = () => {
   const { mutate: login, isPending } = useLogin();
 
   return (
-    <View className="flex-1 justify-center items-center gap-6">
+    <ScrollView contentContainerClassName="flex-1 justify-center items-center gap-6">
       <View className="justify-center items-center gap-0.5">
         <Text className="font-gimlet-medium text-primary">Dobro došli</Text>
         <Image
@@ -78,7 +85,7 @@ const LoginScreen = () => {
           </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

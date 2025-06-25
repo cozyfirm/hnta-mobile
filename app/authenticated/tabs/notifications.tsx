@@ -3,7 +3,7 @@ import NotificationsScreen from '@/screens/NotificationsScreen';
 
 const Screen = () => {
   return (
-    <Layout primaryBackground>
+    <Layout primaryBackground isTabs>
       <NotificationsScreen />
     </Layout>
   );

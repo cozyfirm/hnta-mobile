@@ -12,6 +12,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { useAuthStore } from '@/store';
+
 interface DrawerProps {
   isVisible: boolean;
   onClose: () => void;
@@ -25,12 +27,14 @@ const menuItems = [
   { id: 5, title: 'Studenti', route: '/authenticated/attendees' },
   { id: 6, title: 'O nama', route: '/authenticated/about' },
   { id: 7, title: 'Pravila privatnosti', route: '/authenticated/privacy' },
+  { id: 8, title: 'Odjavi se', route: '/logout' },
 ] as const;
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const DRAWER_WIDTH = SCREEN_WIDTH;
 
 const Drawer = ({ isVisible, onClose }: DrawerProps) => {
+  const { setUser } = useAuthStore();
   const insets = useSafeAreaInsets();
   const translateX = React.useRef(new Animated.Value(DRAWER_WIDTH)).current;
 
@@ -44,7 +48,12 @@ const Drawer = ({ isVisible, onClose }: DrawerProps) => {
 
   const handleMenuItemPress = (route: string) => {
     onClose();
-    router.push(route as any); // Using type assertion as a temporary solution
+    if (route === '/logout') {
+      setUser(null);
+      router.push('/guest');
+    } else {
+      router.push(route as any); // Using type assertion as a temporary solution
+    }
   };
 
   if (!isVisible) return null;

@@ -1,10 +1,10 @@
 import Layout from '@/components/Layout';
-import MessagesScreen from '@/screens/MessagesScreen';
+import EditProfileScreen from '@/screens/EditProfileScreen';
 
 const Screen = () => {
   return (
-    <Layout primaryBackground isTabs>
-      <MessagesScreen />
+    <Layout primaryBackground>
+      <EditProfileScreen />
     </Layout>
   );
 };

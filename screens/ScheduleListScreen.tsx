@@ -76,8 +76,8 @@ const ScheduleListScreen = () => {
         <FlatList
           data={scheduleItems}
           renderItem={({ item }) => (
-            <ScheduleCard 
-              item={item} 
+            <ScheduleCard
+              item={item}
               onPress={() => handleScheduleCardPress(item)}
             />
           )}

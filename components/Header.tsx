@@ -4,11 +4,11 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 import { router } from 'expo-router';
 
+import Drawer from './Drawer';
 import BackArrowIcon from '@/icons/BackArrowIcon';
 import BellIcon from '@/icons/BellIcon';
 import ThreeDotsIcon from '@/icons/ThreeDotsIcon';
-import { useAuthStore } from '@/store';
-import Drawer from './Drawer';
+import { useAuthStore, useTabStore } from '@/store';
 
 interface HeaderProps {
   showBackButton?: boolean;
@@ -16,12 +16,19 @@ interface HeaderProps {
 
 const Header = ({ showBackButton = false }: HeaderProps) => {
   const { user } = useAuthStore();
+  const { setCurrentTab } = useTabStore();
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
 
   return (
     <>
       <View className="bg-primary p-5 flex-row justify-between items-center">
-        <View className="flex flex-row justify-center items-center gap-2 w-fit">
+        <TouchableOpacity
+          activeOpacity={0.8}
+          className="flex flex-row justify-center items-center gap-2 w-fit"
+          onPress={() =>
+            router.push({ pathname: '/authenticated/edit-profile' })
+          }
+        >
           <Image
             source={{
               uri: user?.photo?.hasPhoto
@@ -35,7 +42,7 @@ const Header = ({ showBackButton = false }: HeaderProps) => {
           <Text className="font-gimlet-regular text-background text-xl tracking-widest -mb-2">
             {user?.name}
           </Text>
-        </View>
+        </TouchableOpacity>
         <View className="flex-row justify-center items-center gap-2">
           {showBackButton && (
             <TouchableOpacity
@@ -49,6 +56,10 @@ const Header = ({ showBackButton = false }: HeaderProps) => {
           <TouchableOpacity
             activeOpacity={0.8}
             className="h-12 w-12 rounded-full bg-white/40 justify-center items-center"
+            onPress={() => {
+              setCurrentTab('messages');
+              router.push('/authenticated/tabs/messages');
+            }}
           >
             <BellIcon />
           </TouchableOpacity>
@@ -61,7 +72,10 @@ const Header = ({ showBackButton = false }: HeaderProps) => {
           </TouchableOpacity>
         </View>
       </View>
-      <Drawer isVisible={isDrawerVisible} onClose={() => setIsDrawerVisible(false)} />
+      <Drawer
+        isVisible={isDrawerVisible}
+        onClose={() => setIsDrawerVisible(false)}
+      />
     </>
   );
 };

@@ -134,7 +134,10 @@ export const useChatMessages = (conversation_id: number) => {
   });
 };
 
-export const useSendMessage = () => {
+export const useSendMessage = (callbacks?: {
+  onSuccess?: () => void;
+  onError?: (error: any) => void;
+}) => {
   const { user } = useAuthStore();
 
   return useMutation({
@@ -152,6 +155,8 @@ export const useSendMessage = () => {
       );
       return response.data;
     },
+    onSuccess: callbacks?.onSuccess,
+    onError: callbacks?.onError,
   });
 };
 

@@ -11,7 +11,7 @@ export interface Notification {
   read_at: string | null;
   created_at: string;
   // I am adding this based on the preview API, assuming it might be there
-  content?: string; 
+  content?: string;
 }
 
 export interface NotificationsResponse {
@@ -63,4 +63,20 @@ export const useNotificationPreview = (id: string) => {
     },
     enabled: !!id,
   });
-}; 
+};
+
+export const useNotificationsInfo = () => {
+  const { user } = useAuthStore();
+
+  return useQuery({
+    queryKey: ['notifications-info'],
+    queryFn: async () => {
+      const response = await axios.post('/api/users/notifications-info', {
+        api_token: user?.api_token,
+      });
+
+      return response?.data?.data;
+    },
+    enabled: !!user?.api_token,
+  });
+};

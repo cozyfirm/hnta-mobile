@@ -12,7 +12,7 @@ import {
   View,
 } from 'react-native';
 
-import { useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useGlobalSearchParams, useLocalSearchParams } from 'expo-router';
 
 import Header from '@/components/Header';
@@ -68,7 +68,20 @@ const ChatDetailScreen = () => {
     refetch,
   } = useChatMessages(conversationId || 0);
 
-  const sendMessage = useSendMessage();
+  const sendMessage = useSendMessage({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['chat', conversationId],
+      });
+      setMessage('');
+    },
+    onError: (error) => {
+      queryClient.invalidateQueries({
+        queryKey: ['chat', conversationId],
+      });
+      setMessage('');
+    },
+  });
 
   const messages = useMemo(() => {
     if (!data?.pages) return [];
@@ -89,26 +102,17 @@ const ChatDetailScreen = () => {
 
   const handleSendMessage = () => {
     if (message.trim().length > 0 && conversationId) {
-      sendMessage.mutate(
-        {
-          conversation_id: conversationId,
-          message,
-          hash: hash || getOrCreateChat.data?.hash || '',
-        },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries({
-              queryKey: ['chat', conversationId],
-            });
-            setMessage('');
-          },
-        }
-      );
+      sendMessage.mutate({
+        conversation_id: conversationId,
+        message,
+        hash: hash || getOrCreateChat.data?.hash || '',
+      });
     }
   };
 
   const renderMessage = ({ item }: { item: ChatMessage }) => {
     const isMe = item?.sender_rel?.username === user?.username;
+
     return (
       <View
         className={`p-3 m-2 rounded-lg border max-w-[80%] ${
@@ -131,11 +135,7 @@ const ChatDetailScreen = () => {
   };
 
   return (
-    <KeyboardAvoidingView
-      className="flex-1 bg-background"
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={90}
-    >
+    <View className="flex-1 bg-background">
       <Header showBackButton />
 
       {/* Show loading while getting or creating chat */}
@@ -195,6 +195,7 @@ const ChatDetailScreen = () => {
         <TextInput
           className="flex-1 border border-primary text-secondary font-gimlet-medium rounded-xl py-4 px-4"
           placeholder="Poruka..."
+          placeholderTextColor="white"
           placeholderClassName="text-secondary"
           value={message}
           onChangeText={setMessage}
@@ -207,11 +208,11 @@ const ChatDetailScreen = () => {
           {sendMessage.isPending ? (
             <ActivityIndicator color="#66CCCC" />
           ) : (
-            <Text className="font-gimlet-medium text-background">Send</Text>
+            <Text className="font-gimlet-medium text-background">Pošalji</Text>
           )}
         </TouchableOpacity>
       </View>
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 
