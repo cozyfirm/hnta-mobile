@@ -1,8 +1,7 @@
 import Axios from 'axios';
-import Constants from 'expo-constants';
 
 export const axios = Axios.create({
-  baseURL: Constants.expoConfig?.extra?.API_URL,
+  baseURL: 'https://staging.talentakademija.ba/',
   headers: {
     'Content-Type': 'application/json',
   },

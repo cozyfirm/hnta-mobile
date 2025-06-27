@@ -1,7 +1,7 @@
 module.exports = {
   expo: {
     name: 'HNTA',
-    slug: 'hnta-mobile',
+    slug: 'hnta',
     version: '1.0.0',
     orientation: 'portrait',
     icon: './assets/images/icon.png',
@@ -9,13 +9,19 @@ module.exports = {
     userInterfaceStyle: 'automatic',
     newArchEnabled: true,
     ios: {
-      supportsTablet: true,
+      supportsTablet: false,
+      bundleIdentifier: 'ba.talentakademija.app',
+      infoPlist: {
+        ITSAppUsesNonExemptEncryption: false,
+      },
     },
     android: {
       adaptiveIcon: {
         foregroundImage: './assets/images/adaptive-icon.png',
         backgroundColor: '#333366',
       },
+      versionCode: 1,
+      package: 'ba.talentakademija.app',
       edgeToEdgeEnabled: true,
     },
     web: {
@@ -39,7 +45,9 @@ module.exports = {
       typedRoutes: true,
     },
     extra: {
-      API_URL: process.env.API_URL,
+      eas: {
+        projectId: '2deb3322-36ce-41e2-9e98-d073eaefb0c7',
+      },
     },
   },
 };
