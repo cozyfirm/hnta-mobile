@@ -5,6 +5,7 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { router } from 'expo-router';
 
 import Drawer from './Drawer';
+import { getBaseURL } from '@/helpers';
 import BackArrowIcon from '@/icons/BackArrowIcon';
 import BellIcon from '@/icons/BellIcon';
 import ThreeDotsIcon from '@/icons/ThreeDotsIcon';
@@ -32,9 +33,7 @@ const Header = ({ showBackButton = false }: HeaderProps) => {
           <Image
             source={{
               uri: user?.photo?.hasPhoto
-                ? 'https://staging.talentakademija.ba' +
-                  user?.photo?.path +
-                  user?.photo?.photo_uri
+                ? getBaseURL() + user?.photo?.path + user?.photo?.photo_uri
                 : 'https://ui-avatars.com/api/?name=' + user?.name,
             }}
             className="h-12 w-12 rounded-full"
@@ -48,7 +47,11 @@ const Header = ({ showBackButton = false }: HeaderProps) => {
             <TouchableOpacity
               activeOpacity={0.8}
               className="h-12 w-12 rounded-full bg-white/40 justify-center items-center"
-              onPress={() => router.back()}
+              onPress={() =>
+                router.canGoBack()
+                  ? router.back()
+                  : router.replace('/authenticated/tabs')
+              }
             >
               <BackArrowIcon />
             </TouchableOpacity>
@@ -58,7 +61,7 @@ const Header = ({ showBackButton = false }: HeaderProps) => {
             className="h-12 w-12 rounded-full bg-white/40 justify-center items-center"
             onPress={() => {
               setCurrentTab('messages');
-              router.push('/authenticated/tabs/messages');
+              router.push('/authenticated/tabs/notifications');
             }}
           >
             <BellIcon />

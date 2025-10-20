@@ -2,7 +2,7 @@ module.exports = {
   expo: {
     name: 'HNTA',
     slug: 'hnta',
-    version: '1.0.0',
+    version: '1.0.3',
     orientation: 'portrait',
     icon: './assets/images/icon.png',
     scheme: 'hntamobile',
@@ -11,8 +11,12 @@ module.exports = {
     ios: {
       supportsTablet: false,
       bundleIdentifier: 'ba.talentakademija.app',
+      googleServicesFile: './GoogleService-Info.plist',
+      entitlements: {
+        'aps-environment': 'production',
+      },
       infoPlist: {
-        ITSAppUsesNonExemptEncryption: false,
+        UIBackgroundModes: ['remote-notification'],
       },
     },
     android: {
@@ -23,6 +27,13 @@ module.exports = {
       versionCode: 1,
       package: 'ba.talentakademija.app',
       edgeToEdgeEnabled: true,
+      googleServicesFile: './google-services.json',
+      permissions: [
+        'android.permission.WAKE_LOCK',
+        'android.permission.VIBRATE',
+        'android.permission.RECEIVE_BOOT_COMPLETED',
+        'android.permission.USE_FULL_SCREEN_INTENT',
+      ],
     },
     web: {
       bundler: 'metro',
@@ -38,6 +49,16 @@ module.exports = {
           imageWidth: 200,
           resizeMode: 'contain',
           backgroundColor: '#333366',
+        },
+      ],
+      '@react-native-firebase/app',
+      '@react-native-firebase/messaging',
+      [
+        'expo-build-properties',
+        {
+          ios: {
+            useFrameworks: 'static',
+          },
         },
       ],
     ],

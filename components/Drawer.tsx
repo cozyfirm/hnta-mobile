@@ -21,12 +21,27 @@ interface DrawerProps {
 
 const menuItems = [
   { id: 1, title: 'Vijesti', route: '/authenticated/news' },
-  { id: 2, title: 'Važni kontakti', route: '/authenticated/contacts' },
+  {
+    id: 2,
+    title: 'Važni kontakti',
+    route: '/authenticated/dynamic-screen',
+    params: { slug: 'important-numbers' },
+  },
   { id: 3, title: 'Lokacije', route: '/authenticated/locations' },
   { id: 4, title: 'Predavači', route: '/authenticated/presenters' },
   { id: 5, title: 'Studenti', route: '/authenticated/attendees' },
-  { id: 6, title: 'O nama', route: '/authenticated/about' },
-  { id: 7, title: 'Pravila privatnosti', route: '/authenticated/privacy' },
+  {
+    id: 6,
+    title: 'O nama',
+    route: '/authenticated/dynamic-screen',
+    params: { slug: 'about' },
+  },
+  {
+    id: 7,
+    title: 'Pravila privatnosti',
+    route: '/authenticated/dynamic-screen',
+    params: { slug: 'privacy-policy' },
+  },
   { id: 8, title: 'Odjavi se', route: '/logout' },
 ] as const;
 
@@ -46,13 +61,16 @@ const Drawer = ({ isVisible, onClose }: DrawerProps) => {
     }).start();
   }, [isVisible]);
 
-  const handleMenuItemPress = (route: string) => {
+  const handleMenuItemPress = (route: string, params: any) => {
     onClose();
     if (route === '/logout') {
       setUser(null);
       router.push('/guest');
     } else {
-      router.push(route as any); // Using type assertion as a temporary solution
+      router.push({
+        pathname: route,
+        params: params,
+      }); // Using type assertion as a temporary solution
     }
   };
 
@@ -93,7 +111,7 @@ const Drawer = ({ isVisible, onClose }: DrawerProps) => {
             <TouchableOpacity
               key={item.id}
               className="py-4"
-              onPress={() => handleMenuItemPress(item.route)}
+              onPress={() => handleMenuItemPress(item.route, item.params)}
             >
               <Text className="text-primary text-xl font-gimlet-regular">
                 {item.title}

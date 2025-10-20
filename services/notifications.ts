@@ -78,5 +78,7 @@ export const useNotificationsInfo = () => {
       return response?.data?.data;
     },
     enabled: !!user?.api_token,
+    refetchInterval: 15000, // Refetch every 30 seconds
+    refetchIntervalInBackground: true, // Continue refetching even when app is in background
   });
 };

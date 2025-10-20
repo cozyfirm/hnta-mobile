@@ -11,20 +11,20 @@ interface LoginRequest {
 }
 
 export const useLogin = () => {
-  const { setUser } = useAuthStore();
+  const { fcmToken, setUser } = useAuthStore();
 
   return useMutation({
     mutationFn: async ({ email, password }: LoginRequest) => {
       const response = await axios.post('/api/auth', {
         email,
         password,
+        fcm_token: fcmToken,
       });
       return response?.data;
     },
     onSuccess: async (data) => {
       if (data.code === '0000') {
         setUser(data?.data);
-        Toast.success('Prijava uspješna');
         router.replace('/authenticated');
       } else {
         Toast.error(data.message);

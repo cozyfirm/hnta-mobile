@@ -2,15 +2,23 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 import { Link } from 'expo-router';
 
+import { getBaseURL } from '@/helpers';
 import { Chat } from '@/services';
 
 interface MessageCardProps {
   item: Chat;
   onPress: () => void;
+  messages?: boolean;
 }
 
-const MessageCard = ({ item, onPress }: MessageCardProps) => {
-  const isRead = item?.my_side?.unread === 0;
+const MessageCard = ({ item, onPress, messages = false }: MessageCardProps) => {
+  let isRead = item?.my_side?.unread === 0;
+
+  console.log(item);
+
+  if (messages) {
+    isRead = !isRead;
+  }
 
   return (
     <TouchableOpacity onPress={onPress}>
@@ -22,9 +30,7 @@ const MessageCard = ({ item, onPress }: MessageCardProps) => {
         <View className="flex-row items-center">
           <Image
             source={{
-              uri:
-                'https://staging.talentakademija.ba/' +
-                item?.user_rel?.photo_path,
+              uri: getBaseURL() + item?.user_rel?.user_rel?.photo_path,
             }}
             className="w-12 h-12 rounded-full mr-4"
           />
@@ -32,7 +38,7 @@ const MessageCard = ({ item, onPress }: MessageCardProps) => {
             <Text
               className={`text-lg font-gimlet-bold ${!isRead ? 'text-secondary' : 'text-background'}`}
             >
-              {item.user_rel?.user_rel?.name}
+              {item?.name ?? item.user_rel?.user_rel?.name}
             </Text>
             <Text
               className={`font-gimlet-regular ${!isRead ? 'text-secondary' : 'text-background'}`}

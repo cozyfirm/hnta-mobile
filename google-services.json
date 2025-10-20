@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "458017711560",
+    "project_id": "hnta-fbf7a",
+    "storage_bucket": "hnta-fbf7a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458017711560:android:c36372a47684c4e2b34cfd",
+        "android_client_info": {
+          "package_name": "ba.talentakademija.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO1JHLDErjeLb5z5YRIoP7a-pY2XK1SsE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

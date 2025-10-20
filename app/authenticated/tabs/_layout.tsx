@@ -1,6 +1,7 @@
-import { Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 
 import { Tabs } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import CalendarIcon from '@/icons/CalendarIcon';
 import HomeIcon from '@/icons/HomeIcon';
@@ -12,14 +13,16 @@ import { useTabStore } from '@/store';
 const Layout = () => {
   const { currentTab, setCurrentTab } = useTabStore();
   const { data, isLoading, error } = useNotificationsInfo();
+  const insets = useSafeAreaInsets();
 
   return (
     <Tabs
       screenOptions={{
         tabBarStyle: {
           backgroundColor: '#333366',
-          height: 80,
+          height: Platform.OS === 'android' ? 60 : 80,
           paddingTop: 10,
+          marginBottom: Platform.OS === 'android' ? insets.bottom : 0,
         },
         tabBarLabelStyle: {
           fontFamily: 'Inter-SemiBold',

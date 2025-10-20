@@ -13,6 +13,7 @@ import { router } from 'expo-router';
 
 import Header from '@/components/Header';
 import ProgramSwitcher from '@/components/ProgramSwitcher';
+import { getBaseURL } from '@/helpers';
 import { type Attendee, useAttendees } from '@/services';
 import { useProgramStore } from '@/store';
 
@@ -20,7 +21,7 @@ const AttendeeCard = ({ item }: { item: Attendee }) => {
   const handleChatPress = () => {
     router.push({
       pathname: '/authenticated/chat-detail',
-      params: { 
+      params: {
         userId: item.id.toString(),
         name: item.name,
       },
@@ -41,7 +42,7 @@ const AttendeeCard = ({ item }: { item: Attendee }) => {
       {item?.photo_path && (
         <Image
           source={{
-            uri: 'https://staging.talentakademija.ba/' + item.photo_path,
+            uri: getBaseURL() + item.photo_path,
           }}
           className="w-full h-48"
           resizeMode="cover"
@@ -54,7 +55,7 @@ const AttendeeCard = ({ item }: { item: Attendee }) => {
               {item?.name}
             </Text>
           </View>
-          <TouchableOpacity 
+          <TouchableOpacity
             className="bg-primary rounded-xl w-14 h-14 justify-center items-center"
             onPress={handleChatPress}
           >
@@ -144,7 +145,7 @@ const AttendeesScreen = () => {
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ padding: 20 }}
+        contentContainerStyle={{ padding: 20, paddingBottom: 100 }}
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0.5}
         ListHeaderComponent={renderHeader}

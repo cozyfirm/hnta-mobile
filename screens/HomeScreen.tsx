@@ -1,11 +1,19 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 
 import Header from '@/components/Header';
+import Blog from '@/icons/Blog';
+import ChatBubble from '@/icons/ChatBubble';
+import Location from '@/icons/Location';
+import Presenters from '@/icons/Presenters';
+import Schedule from '@/icons/Schedule';
+import Students from '@/icons/Students';
+import { useTabStore } from '@/store';
 
 const HomeScreen = () => {
+  const { setCurrentTab } = useTabStore();
+
   return (
     <View className="flex-1 bg-background">
       <Header />
@@ -15,27 +23,16 @@ const HomeScreen = () => {
             {
               label: 'Raspored',
               color: 'bg-primary',
-              icon: (
-                <MaterialCommunityIcons
-                  name="calendar-month"
-                  size={48}
-                  color="#333366"
-                />
-              ),
+              icon: <Schedule />,
               onPress: () => {
+                setCurrentTab('calendar');
                 router.push('/authenticated/tabs/calendar');
               },
             },
             {
               label: 'Generalne\nobavijesti',
               color: 'bg-tertiary',
-              icon: (
-                <MaterialCommunityIcons
-                  name="message-text-outline"
-                  size={48}
-                  color="#333366"
-                />
-              ),
+              icon: <ChatBubble />,
               onPress: () => {
                 router.push('/authenticated/tabs/notifications');
               },
@@ -43,13 +40,7 @@ const HomeScreen = () => {
             {
               label: 'Predavači',
               color: 'bg-primary',
-              icon: (
-                <MaterialCommunityIcons
-                  name="account-voice"
-                  size={48}
-                  color="#333366"
-                />
-              ),
+              icon: <Presenters />,
               onPress: () => {
                 router.push('/authenticated/presenters');
               },
@@ -73,13 +64,7 @@ const HomeScreen = () => {
             {
               label: 'Vijesti',
               color: 'bg-tertiary',
-              icon: (
-                <MaterialCommunityIcons
-                  name="newspaper-variant-outline"
-                  size={48}
-                  color="#333366"
-                />
-              ),
+              icon: <Blog />,
               onPress: () => {
                 router.push('/authenticated/news');
               },
@@ -87,9 +72,7 @@ const HomeScreen = () => {
             {
               label: 'Lokacije',
               color: 'bg-primary',
-              icon: (
-                <MaterialIcons name="location-pin" size={48} color="#333366" />
-              ),
+              icon: <Location />,
               onPress: () => {
                 router.push('/authenticated/locations');
               },
@@ -97,7 +80,7 @@ const HomeScreen = () => {
             {
               label: 'Učesnici',
               color: 'bg-tertiary',
-              icon: <MaterialIcons name="person" size={48} color="#333366" />,
+              icon: <Students />,
               onPress: () => {
                 router.push('/authenticated/attendees');
               },

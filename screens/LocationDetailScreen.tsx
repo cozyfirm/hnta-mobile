@@ -4,6 +4,7 @@ import {
   ActivityIndicator,
   Image,
   Linking,
+  Platform,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -15,6 +16,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
 
 import Header from '@/components/Header';
+import { getBaseURL } from '@/helpers';
 import { useLocationPreview } from '@/services';
 
 const LocationDetailScreen = () => {
@@ -40,20 +42,25 @@ const LocationDetailScreen = () => {
   }
 
   const imageUrl = location?.main_img
-    ? `https://staging.talentakademija.ba/${location?.photo_path}${location?.main_img}`
+    ? `${getBaseURL()}${location?.photo_path}${location?.main_img}`
     : null;
 
   const mapImageUrl = location?.map_img
-    ? `https://staging.talentakademija.ba/${location?.photo_path}${location?.map_img}`
+    ? `${getBaseURL()}${location?.photo_path}${location?.map_img}`
     : null;
 
   // Remove HTML tags from description
   const plainDescription = location?.description?.replace(/<[^>]+>/g, '');
 
   return (
-    <View className="flex-1 bg-background">
+    <View
+      className="flex-1 bg-background"
+      style={{
+        paddingBottom: Platform.OS === 'android' ? 20 : 0,
+      }}
+    >
       <Header showBackButton />
-      <ScrollView className="flex-1">
+      <ScrollView className="flex-1 pb-10">
         {imageUrl && (
           <Image
             source={{ uri: imageUrl }}

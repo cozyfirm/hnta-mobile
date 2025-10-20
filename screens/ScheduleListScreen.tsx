@@ -37,7 +37,24 @@ const EmptyItem = () => (
 );
 
 const ScheduleListScreen = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const fixedStartDate = new Date(2025, 7, 2, 10); // August 2, 2025 (month is 0-indexed)
+  const fixedEndDate = new Date(2025, 7, 7, 10); // August 7, 2025
+
+  // Determine the default selected date
+  const getDefaultDate = () => {
+    const today = new Date();
+    const todayString = today.toDateString();
+
+    // Check if today falls within the date range
+    if (today >= fixedStartDate && today <= fixedEndDate) {
+      return today;
+    }
+
+    // If not, default to August 2, 2025
+    return fixedStartDate;
+  };
+
+  const [selectedDate, setSelectedDate] = useState(getDefaultDate());
   const { selectedProgram } = useProgramStore();
 
   const { data, isLoading, isError } = useSchedule(
@@ -69,10 +86,7 @@ const ScheduleListScreen = () => {
       <Header />
       <ProgramSwitcher />
       <View className="flex-1">
-        <DateWheelPicker
-          initialDate={selectedDate}
-          onDateChange={handleDateChange}
-        />
+        <DateWheelPicker onDateChange={handleDateChange} />
         <FlatList
           data={scheduleItems}
           renderItem={({ item }) => (

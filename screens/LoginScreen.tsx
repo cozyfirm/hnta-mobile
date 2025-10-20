@@ -39,7 +39,7 @@ const LoginScreen = () => {
           <View className="flex-row items-center border border-primary rounded-lg px-3 py-2">
             <MailIcon />
             <TextInput
-              placeholder="hnta@fondacijaaekipa.ba"
+              placeholder="example@mail.com"
               placeholderTextColor="#3e7d77"
               className="ml-2 flex-1 text-primary font-gimlet-medium"
               keyboardType="email-address"

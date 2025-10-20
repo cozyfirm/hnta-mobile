@@ -16,6 +16,8 @@ interface User {
 interface AuthStore {
   user: User | null;
   setUser: (user: User | null) => void;
+  fcmToken: string | null;
+  setFcmToken: (fcmToken: string | null) => void;
 }
 
 export const useAuthStore = create<AuthStore>()(
@@ -23,6 +25,8 @@ export const useAuthStore = create<AuthStore>()(
     (set) => ({
       user: null,
       setUser: (user) => set({ user }),
+      fcmToken: null,
+      setFcmToken: (fcmToken: string | null) => set({ fcmToken }),
     }),
     {
       name: 'auth-storage',

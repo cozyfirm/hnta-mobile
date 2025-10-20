@@ -38,7 +38,7 @@ const SessionDetailScreen = () => {
   const session = data.data.session;
 
   return (
-    <View className="flex-1 bg-background">
+    <View className="flex-1 bg-background pb-10">
       <Header showBackButton />
       <ScrollView
         className="flex-1"

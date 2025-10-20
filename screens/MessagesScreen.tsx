@@ -49,7 +49,11 @@ const MessagesScreen = () => {
       <FlatList
         data={data}
         renderItem={({ item }) => (
-          <MessageCard item={item} onPress={() => handleMessagePress(item)} />
+          <MessageCard
+            item={item}
+            onPress={() => handleMessagePress(item)}
+            messages={true}
+          />
         )}
         keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={{ padding: 20 }}

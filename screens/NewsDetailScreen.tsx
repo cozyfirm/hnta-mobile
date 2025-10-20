@@ -4,8 +4,10 @@ import { ActivityIndicator, Image, ScrollView, Text, View } from 'react-native';
 
 import { useLocalSearchParams } from 'expo-router';
 import { decode } from 'html-entities';
+import { WebView } from 'react-native-webview';
 
 import Header from '@/components/Header';
+import { getBaseURL } from '@/helpers';
 import { useBlogPostPreview } from '@/services';
 
 const NewsDetailScreen = () => {
@@ -31,7 +33,7 @@ const NewsDetailScreen = () => {
   }
 
   const imageUrl = post?.img_one?.name
-    ? `https://staging.talentakademija.ba/${post?.photo_path}${post?.img_one?.name}`
+    ? `${getBaseURL()}${post?.photo_path}${post?.img_one?.name}`
     : null;
 
   // Remove HTML tags and decode entities from description
@@ -39,10 +41,13 @@ const NewsDetailScreen = () => {
     post?.description?.replace(/<[^>]+>/g, '') || ''
   );
 
+  // Extract video URL if available
+  const videoUrl = post?.video;
+
   return (
-    <View className="flex-1 bg-background">
+    <View className="flex-1 bg-background pb-10">
       <Header showBackButton />
-      <ScrollView className="flex-1">
+      <ScrollView className="flex-1 pb-10">
         {imageUrl && (
           <Image
             source={{ uri: imageUrl }}
@@ -55,9 +60,21 @@ const NewsDetailScreen = () => {
             {decode(post?.title || '')}
           </Text>
           {cleanDescription && (
-            <Text className="text-primary text-base font-gimlet-regular">
+            <Text className="text-primary text-base font-gimlet-regular mb-4">
               {cleanDescription}
             </Text>
+          )}
+          {videoUrl && (
+            <View className="w-full h-56 mb-4">
+              <WebView
+                source={{ uri: videoUrl }}
+                style={{ flex: 1 }}
+                allowsFullscreenVideo={true}
+                mediaPlaybackRequiresUserAction={false}
+                javaScriptEnabled={true}
+                domStorageEnabled={true}
+              />
+            </View>
           )}
         </View>
       </ScrollView>

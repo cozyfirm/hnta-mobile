@@ -11,11 +11,12 @@ import { router } from 'expo-router';
 import { decode } from 'html-entities';
 
 import Header from '@/components/Header';
+import { getBaseURL } from '@/helpers';
 import { type BlogPost, useBlogPosts } from '@/services';
 
 const NewsCard = ({ item }: { item: BlogPost }) => {
   const imageUrl = item?.main_img
-    ? `https://staging.talentakademija.ba/${item?.photo_path}${item?.img_one?.name}`
+    ? `${getBaseURL()}${item?.photo_path}${item?.img_one?.name}`
     : null;
 
   return (

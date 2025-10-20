@@ -71,7 +71,7 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ item, onPress }) => {
           numberOfLines={0}
         >
           {item?.presenters_rel
-            ? item?.presenters_rel[0].presenter_rel?.name
+            ? item?.presenters_rel[0]?.presenter_rel?.name
             : item.location_rel?.title}
         </Text>
       </View>

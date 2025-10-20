@@ -1,5 +1,7 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { View, TouchableOpacity, Text, Pressable, Modal } from 'react-native';
+import React, { useEffect, useMemo, useState } from 'react';
+
+import { Modal, Pressable, Text, TouchableOpacity, View } from 'react-native';
+
 import { WheelPicker } from './WheelPicker';
 
 interface DateWheelPickerProps {
@@ -18,39 +20,41 @@ export const DateWheelPicker: React.FC<DateWheelPickerProps> = ({
   endDate,
 }) => {
   // Set the fixed date range for August 2-7, 2025
-  const fixedStartDate = new Date(2025, 7, 2); // August 2, 2025 (month is 0-indexed)
-  const fixedEndDate = new Date(2025, 7, 7); // August 7, 2025
+  const fixedStartDate = new Date(2025, 7, 2, 10);
+  const fixedEndDate = new Date(2025, 7, 8, 10);
 
   // Determine the default selected date
   const getDefaultDate = () => {
     const today = new Date();
     const todayString = today.toDateString();
-    
+
     // Check if today falls within the date range
     if (today >= fixedStartDate && today <= fixedEndDate) {
       return today;
     }
-    
+
     // If not, default to August 2, 2025
     return fixedStartDate;
   };
 
-  const [selectedDate, setSelectedDate] = useState(initialDate || getDefaultDate());
+  const [selectedDate, setSelectedDate] = useState(getDefaultDate());
   const [isOpen, setIsOpen] = useState(false);
   const [tempSelectedIndex, setTempSelectedIndex] = useState(0);
 
   const dates = useMemo(() => {
     const result = [];
-    
+
     // Use the fixed date range instead of the props
     const start = fixedStartDate;
     const end = fixedEndDate;
-    
+
     let currentDate = new Date(start);
     let dayNumber = 1;
-    
+
     while (currentDate <= end) {
-      const dayName = new Intl.DateTimeFormat('hr-HR', { weekday: 'long' }).format(currentDate);
+      const dayName = new Intl.DateTimeFormat('hr-HR', {
+        weekday: 'long',
+      }).format(currentDate);
       const formattedDate = new Intl.DateTimeFormat('hr-HR', {
         day: '2-digit',
         month: '2-digit',
@@ -62,11 +66,11 @@ export const DateWheelPicker: React.FC<DateWheelPickerProps> = ({
         sublabel: `${dayName}, ${formattedDate}.`,
         date: new Date(currentDate),
       });
-      
+
       currentDate.setDate(currentDate.getDate() + 1);
       dayNumber++;
     }
-    
+
     return result;
   }, []); // Remove dependencies since we're using fixed dates
 
@@ -112,7 +116,7 @@ export const DateWheelPicker: React.FC<DateWheelPickerProps> = ({
 
   return (
     <View className="bg-background">
-      <TouchableOpacity 
+      <TouchableOpacity
         onPress={toggleOpen}
         activeOpacity={0.8}
         className="bg-background px-12 py-4 flex-row items-center"
@@ -127,18 +131,18 @@ export const DateWheelPicker: React.FC<DateWheelPickerProps> = ({
           </Text>
         </View>
       </TouchableOpacity>
-      
+
       <Modal
         visible={isOpen}
         transparent
         animationType="fade"
         onRequestClose={() => setIsOpen(false)}
       >
-        <Pressable 
-          onPress={() => setIsOpen(false)} 
-          className="flex-1 justify-center items-center bg-black/20"
+        <Pressable
+          onPress={() => setIsOpen(false)}
+          className="flex-1 justify-center items-center bg-black/50"
         >
-          <Pressable 
+          <Pressable
             onPress={(e) => e.stopPropagation()}
             className="bg-background rounded-lg overflow-hidden w-11/12"
           >
@@ -153,13 +157,17 @@ export const DateWheelPicker: React.FC<DateWheelPickerProps> = ({
                 onPress={() => setIsOpen(false)}
                 className="px-6 py-2 mr-2"
               >
-                <Text className="text-primary/60 font-gimlet-medium">Odustani</Text>
+                <Text className="text-primary/60 font-gimlet-medium">
+                  Odustani
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={handleConfirm}
                 className="bg-primary px-6 py-2 rounded-lg"
               >
-                <Text className="text-background font-gimlet-bold">Potvrdi</Text>
+                <Text className="text-background font-gimlet-bold">
+                  Potvrdi
+                </Text>
               </TouchableOpacity>
             </View>
           </Pressable>
@@ -167,4 +175,4 @@ export const DateWheelPicker: React.FC<DateWheelPickerProps> = ({
       </Modal>
     </View>
   );
-}; 
+};

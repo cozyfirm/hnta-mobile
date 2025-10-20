@@ -5,6 +5,7 @@ import { ActivityIndicator, Image, ScrollView, Text, View } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 
 import Header from '@/components/Header';
+import { getBaseURL } from '@/helpers';
 import { usePresenterPreview } from '@/services';
 
 const PresenterDetailScreen = () => {
@@ -34,7 +35,7 @@ const PresenterDetailScreen = () => {
 
   // Debug logging
   const imageUrl = presenter?.photo_path
-    ? `https://staging.talentakademija.ba/${presenter.photo_path}`
+    ? `${getBaseURL()}${presenter.photo_path}`
     : undefined;
 
   return (

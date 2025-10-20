@@ -31,6 +31,7 @@ import {
 
 import Header from '@/components/Header';
 import Layout from '@/components/Layout';
+import { getBaseURL } from '@/helpers';
 import { useAuthStore } from '@/store';
 
 const EditProfileScreen = () => {
@@ -95,9 +96,7 @@ const EditProfileScreen = () => {
       });
       setPhoto(
         data.photo?.hasPhoto && data.photo?.photo_uri
-          ? 'https://staging.talentakademija.ba' +
-              data.photo.path +
-              data.photo.photo_uri
+          ? getBaseURL() + data.photo.path + data.photo.photo_uri
           : null
       );
       setTempCountry(countryId);
@@ -235,7 +234,7 @@ const EditProfileScreen = () => {
   }
 
   return (
-    <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
+    <ScrollView className="flex-1 mb-10" showsVerticalScrollIndicator={false}>
       <Header showBackButton />
       <View className="items-center mb-6">
         <TouchableOpacity onPress={handlePhotoChange} className="mb-2">

@@ -9,9 +9,10 @@ import {
   View,
 } from 'react-native';
 
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 
 import Header from '@/components/Header';
+import { getBaseURL } from '@/helpers';
 import { useAttendeePreview } from '@/services';
 
 const AttendeeDetailScreen = () => {
@@ -37,7 +38,7 @@ const AttendeeDetailScreen = () => {
   }
 
   const imageUrl = attendee?.photo_path
-    ? `https://staging.talentakademija.ba/${attendee.photo_path}`
+    ? `${getBaseURL()}${attendee.photo_path}`
     : undefined;
 
   const experience = attendee?.application_rel?.[0]?.experience || '';
@@ -54,7 +55,7 @@ const AttendeeDetailScreen = () => {
               uri: imageUrl,
             }}
             className="w-full h-[200px]"
-            resizeMode="cover"
+            resizeMode="contain"
           />
           <Text className="text-background text-2xl font-gimlet-bold mt-4">
             {attendee?.name}
@@ -69,6 +70,12 @@ const AttendeeDetailScreen = () => {
           <TouchableOpacity
             className="bg-tertiary px-8 py-3 rounded-lg mt-4 flex-row items-center"
             activeOpacity={0.8}
+            onPress={() => {
+              router.push({
+                pathname: '/authenticated/chat-detail',
+                params: { userId: attendee?.id, name: attendee?.name },
+              });
+            }}
           >
             <Text className="text-background text-base font-gimlet-medium">
               Pošalji poruku
@@ -109,7 +116,7 @@ const AttendeeDetailScreen = () => {
               LinkedIn
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity className="mb-10">
             <Text className="text-white text-base font-gimlet-regular">
               Web
             </Text>
